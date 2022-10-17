@@ -1,8 +1,46 @@
-<form method="POST">
-    <input name="text">
-    <input type="submit">
-</form>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dist/output.css') }}">
+    <script src="https://unpkg.com/htmx.org@1.8.2"></script>
+    <title>SchilderAI</title>
+</head>
+<body class="bg-slate-800">
 
-<div>
-    <h3>{{ variable }}</h3>
-</div>
+{#  <input hx-post="/clicked" hx-swap="afterend">#}
+{#    Click M#}
+{#  </input>#}
+
+{#<form hx-post="/clicked" hx-swap="afterend">#}
+{#    <input name="text">#}
+{#    <input type="submit">#}
+
+<form hx-post="/clicked" hx-swap="afterend">
+    <div class="grid p-8 flex items-center justify-center bg-slate-800">
+        <div class="w-full max-w-sm mx-auto">
+
+            <div>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                    <div class="relative flex items-stretch flex-grow">
+
+                        <input type="text" name="email" id="email"
+                               class="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-l-md pl-2 sm:text-sm border-gray-300"
+                               placeholder="Fill in your prompt here">
+                    </div>
+                    <button type="submit"
+                            class="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
+
+                        <span>Generate art</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+</body>
+</html>
