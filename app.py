@@ -37,7 +37,7 @@ def show_img():  # put application's code here
         "guidance_scale": 9,
         "height": 512,
         "width": 512,
-        "seed": 3242
+        # "seed": 3242
     }
 
     # Run the model
