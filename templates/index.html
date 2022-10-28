@@ -7,9 +7,32 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dist/output.css') }}">
     <script src="https://unpkg.com/htmx.org@1.8.2"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>SchilderAI</title>
 </head>
-<body class="bg-slate-800">
+
+<script>
+
+    $(document).ready(function (e) {
+
+        $('#genForm').on('submit', function (e) {
+            $.ajax({
+                data: $('#genForm').serialize(),
+                type: 'POST',
+                url: '/predict',
+                success: function (result) {
+                    document.getElementById('imgframe').src = 'data:;base64,' + result['image'];
+                }
+
+            })
+            e.preventDefault();
+        });
+
+    });
+
+
+</script>
+<body class="bg-nice">
 
 {#  <input hx-post="/clicked" hx-swap="afterend">#}
 {#    Click M#}
@@ -19,19 +42,19 @@
 {#    <input name="text">#}
 {#    <input type="submit">#}
 
-<form hx-post="/clicked" hx-swap="afterend">
-    <div class="grid p-8 flex items-center justify-center bg-slate-800">
+<form id="genForm" method="POST">
+    <div class="p-8 flex items-center justify-center bg-nice">
+
         <div class="w-full max-w-sm mx-auto">
 
             <div>
                 <div class="mt-1 flex rounded-md shadow-sm">
                     <div class="relative flex items-stretch flex-grow">
-
-                        <input type="text" name="email" id="email"
+                        <input type="text" name="prompt_input"
                                class="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-l-md pl-2 sm:text-sm border-gray-300"
                                placeholder="Fill in your prompt here">
                     </div>
-                    <button type="submit"
+                    <button id="form_submit_btn" type="submit"
                             class="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
 
                         <span>Generate art</span>
@@ -41,6 +64,13 @@
 
         </div>
     </div>
+
+
 </form>
+<div class="flex items-center flex-wrap justify-center">
+  <div class="w-full max-w-sm mx-auto px-2">
+    <img id="imgframe" src="static/images/output.jpg" alt="..." class="shadow rounded max-w-full h-auto align-middle border-none" />
+  </div>
+</div>
 </body>
 </html>
