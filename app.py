@@ -23,7 +23,9 @@ model_key = "8c1e5f73-e50e-4246-b71d-d07b8f2d7298"
 def hello_world():  # put application's code here
     return render_template('index.html')
 
-
+@app.route('/order')
+def serve_order_page():
+    return render_template('order.html')
 @app.route('/predict', methods=['POST'])
 def show_img():  # put application's code here
 

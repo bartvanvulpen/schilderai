@@ -10,129 +10,111 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>SchilderAI</title>
 </head>
-
-<script>
-
-    $(document).ready(function (e) {
-
-        $('#genForm').on('submit', function (e) {
-            $.ajax({
-                data: $('#genForm').serialize(),
-                type: 'POST',
-                url: '/predict',
-                beforeSend: function () {
-                    document.getElementById('imgframe').src = 'static/images/square_loader.gif'
-                },
-                success: function (result) {
-                    document.getElementById('imgframe').src = 'data:;base64,' + result['image'];
-                }
-
-            })
-            e.preventDefault();
-        });
-
-    });
-
-
-</script>
 <body class="bg-nice">
+<div class="bg-nice">
+    <div class="max-w-4xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-semibold tracking-tight text-schgreen">Let's make your art real</h1>
 
-{#  <input hx-post="/clicked" hx-swap="afterend">#}
-{#    Click M#}
-{#  </input>#}
+      <form class="mt-12">
+        <div>
 
-{#<form hx-post="/clicked" hx-swap="afterend">#}
-{#    <input name="text">#}
-<div style="width: 100%; margin: auto; max-width: 350px; margin-top: 50px">
-    <img src="static/images/logo.png" alt="..."/>
-</div>
-<form id="genForm" method="POST">
-    <div class="p-8 flex items-center justify-center bg-nice">
 
-        <div class="w-full max-w-sm mx-auto">
+          <ul role="list" class="border-t border-b border-gray-200 divide-y divide-gray-200">
 
-            <div>
-                <div class="mt-1 flex rounded-md shadow-sm">
-                    <div class="relative flex items-stretch flex-grow">
-                        <input type="text" name="prompt_input"
-                               class="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-l-md pl-2 sm:text-sm border-gray-300"
-                               placeholder="Fill in your prompt here">
+              <li class="flex py-6 sm:py-10">
+                <div class="flex-shrink-0">
+                  <img src="static/images/output.jpg" alt="Insulated bottle with white base and black snap lid." class="w-24 h-24 rounded-lg object-center object-cover sm:w-32 sm:h-32">
+                </div>
+
+                <div class="relative ml-4 flex-1 flex flex-col justify-between sm:ml-6">
+                  <div>
+                    <div class="flex justify-between sm:grid sm:grid-cols-2">
+                      <div class="pr-6">
+                        <h3 class="text-sm">
+                          <a href="#" class="font-medium text-white hover:text-gray-200">
+                            Custom Art
+                          </a>
+                        </h3>
+                        <p class="mt-1 text-sm text-gray-200">
+                          Canvas
+                        </p>
+                        </div>
+
+                      <p class="text-sm font-medium text-white text-right">$35.00</p>
                     </div>
-                    <button id="form_submit_btn" type="submit"
-                            class="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
 
-                        <span>Generate art</span>
-                    </button>
+                    <div class="mt-4 flex items-center sm:block sm:absolute sm:top-0 sm:left-1/2 sm:mt-0">
+                      <label for="quantity-0" class="sr-only text-gray-200">Format</label>
+                      <select id="quantity-0" name="quantity-0" class="block max-w-full rounded-md border border-gray-300 py-1.5 text-sm leading-5 font-medium text-gray-700 text-left shadow-sm focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="1">40x40</option>
+                        <option value="2">60x60</option>
+
+                      </select>
+
+                    </div>
+                  </div>
+
+                  <p class="mt-4 flex text-sm text-gray-100 space-x-2">
+
+
+                  </p>
                 </div>
+              </li>
+
+          </ul>
+        </div>
+
+        <!-- Order summary -->
+        <div class="mt-10 sm:ml-32 sm:pl-6">
+          <div class="bg-gray-50 rounded-lg px-4 py-6 sm:p-6 lg:p-8">
+            <h2 class="sr-only">Order summary</h2>
+
+            <div class="flow-root">
+              <dl class="-my-4 text-sm divide-y divide-gray-200">
+                <div class="py-4 flex items-center justify-between">
+                  <dt class="text-gray-600">
+                    Subtotal
+                  </dt>
+                  <dd class="font-medium text-gray-900">
+                    $99.00
+                  </dd>
+                </div>
+                <div class="py-4 flex items-center justify-between">
+                  <dt class="text-gray-600">
+                    Shipping
+                  </dt>
+                  <dd class="font-medium text-gray-900">
+                    $5.00
+                  </dd>
+                </div>
+                <div class="py-4 flex items-center justify-between">
+                  <dt class="text-gray-600">
+                    Tax
+                  </dt>
+                  <dd class="font-medium text-gray-900">
+                    $8.32
+                  </dd>
+                </div>
+                <div class="py-4 flex items-center justify-between">
+                  <dt class="text-base font-medium text-gray-900">
+                    Order total
+                  </dt>
+                  <dd class="text-base font-medium text-gray-900">
+                    $112.32
+                  </dd>
+                </div>
+              </dl>
             </div>
+          </div>
+          <div class="mt-10">
+            <button type="submit" class="w-full bg-schgreen border border-transparent rounded-md shadow-sm py-3 px-4 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500">Checkout</button>
+          </div>
+
 
         </div>
+      </form>
     </div>
-
-
-</form>
-<div id='outputframe' class="flex items-center flex-wrap justify-center">
-    <div class="w-full max-w-sm mx-auto px-2">
-        <img id="imgframe" src="static/images/no-image.jpg" alt="..."
-             class="shadow rounded max-w-full h-auto align-middle border-none"/>
-    </div>
-</div>
-<div id='loaderframe' class="flex items-center flex-wrap justify-center" style="display: none;">
-    <div class="w-full max-w-sm mx-auto px-2">
-        <img id="imgframe" src="static/images/output.jpg" alt="..."
-             class="shadow rounded max-w-full h-auto align-middle border-none"/>
-    </div>
-</div>
-
-<div class="flex items-center flex-wrap justify-center">
-    <a href="/order">
-    <button class="bg-schgreen hover:bg-s text-white font-bold py-2 px-4 rounded mt-10">
-        Print your art
-    </button></a>
-</div>
-<h1 class="text-center mb-4 text-2xl font-semibold tracking-tight leading-none text-white md:text-2xl lg:text-4xl dark:text-white mt-20 mb-4">
-    Previously generated art</h1>
-
-<section class="overflow-hidden text-gray-700 mt-0">
-    <div class="container px-5 py-2 mx-auto lg:pt-4 lg:px-32">
-        <div class="flex flex-wrap -m-1 md:-m-2">
-            <div class="flex flex-wrap w-1/2">
-                <div class="w-1/2 p-1 md:p-2">
-                    <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-                         src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(70).webp">
-                </div>
-                <div class="w-1/2 p-1 md:p-2">
-                    <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-                         src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(72).webp">
-                </div>
-                <div class="w-full p-1 md:p-2">
-                    <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-                         src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp">
-                </div>
-            </div>
-            <div class="flex flex-wrap w-1/2">
-                <div class="w-full p-1 md:p-2">
-                    <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-                         src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(74).webp">
-                </div>
-                <div class="w-1/2 p-1 md:p-2">
-                    <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-                         src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(75).webp">
-                </div>
-                <div class="w-1/2 p-1 md:p-2">
-                    <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-                         src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(77).webp">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--
-  This example requires Tailwind CSS v2.0+
-
-  The alpine.js code is *NOT* production ready and is included to preview
-  possible interactivity
--->
+  </div>
 <footer class="bg-nice mt-20" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-8 lg:px-8">
